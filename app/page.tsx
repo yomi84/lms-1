@@ -1,29 +1,34 @@
-import Link from 'next/link';
+import './globals.css'
+import { Poppins } from 'next/font/google'
 
-export default function LandingPage() {
+// Konfigurasi font Poppins agar website terlihat modern
+const poppins = Poppins({ 
+  subsets: ['latin'], 
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-poppins' // Digunakan oleh Tailwind sebagai font-sans
+})
+
+export const metadata = {
+  title: 'MILLY COURSE - Platform Belajar Online Modern',
+  description: 'Belajar kursus online dengan dukungan AI Tutor 24/7. Kuasai skill baru sekarang.',
+  icons: {
+    icon: '/favicon.ico',
+  },
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center text-center p-6">
-      <h1 className="text-5xl font-extrabold text-[#6C5CE7] mb-4">
-        MILLY COURSE
-      </h1>
-      <p className="text-gray-500 text-lg max-w-md mb-8">
-        Platform kursus online modern dengan dukungan AI Tutor 24/7.
-      </p>
-      
-      <div className="flex gap-4">
-        <Link 
-          href="/courses" 
-          className="bg-[#6C5CE7] text-white px-8 py-3 rounded-2xl font-bold hover:scale-105 transition-transform"
-        >
-          Lihat Katalog Kursus
-        </Link>
-        <Link 
-          href="/login" 
-          className="border-2 border-[#6C5CE7] text-[#6C5CE7] px-8 py-3 rounded-2xl font-bold hover:bg-[#6C5CE7]/5 transition"
-        >
-          Masuk / Daftar
-        </Link>
-      </div>
-    </div>
-  );
+    <html lang="id" className="scroll-smooth">
+      <body className={`${poppins.variable} font-sans bg-[#F9FAFB] text-[#1A1A1A] antialiased`}>
+        {/* Layout ini akan membungkus semua halaman seperti page.tsx dan courses/page.tsx */}
+        <div className="min-h-screen flex flex-col">
+          {children}
+        </div>
+      </body>
+    </html>
+  )
 }
